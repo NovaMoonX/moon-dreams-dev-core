@@ -1,14 +1,42 @@
-import { Button } from '@moondreamsdev/dreamer-ui/components';
-import { APP_TITLE, APP_DESCRIPTION } from '@lib/app';
+import { useState } from 'react';
+import { join } from '@moondreamsdev/dreamer-ui/utils';
+import { HeroSection } from '@components/HeroSection';
+import { SiteNav } from '@components/SiteNav';
+import { AboutSection } from '@components/AboutSection';
+import { RegistrySection } from '@components/RegistrySection';
+import { ContactSection } from '@components/ContactSection';
 
 function Home() {
+	const [revealed, setRevealed] = useState(false);
+
 	return (
-		<div className='page flex flex-col items-center justify-center'>
-			<div className='text-center space-y-6 max-w-2xl px-4'>
-				<h1 className='text-5xl md:text-6xl font-bold'>{APP_TITLE}</h1>
-				<p className='text-lg md:text-xl text-foreground/80'>{APP_DESCRIPTION}</p>
-				<Button href='/about'>Learn More</Button>
-			</div>
+		<div className='min-h-dvh w-full bg-[#020617] text-foreground font-[Inter,sans-serif]'>
+			<HeroSection revealed={revealed} onReveal={() => setRevealed(true)} />
+			<SiteNav visible={revealed} />
+
+			{/* Main content — fades in after hero transition */}
+			<main
+				className={join(
+					'transition-all duration-700 ease-in-out',
+					revealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none',
+				)}
+				aria-hidden={!revealed}
+			>
+				{/* Divider line */}
+				<div className='max-w-5xl mx-auto px-6'>
+					<div className='h-px bg-white/5' />
+				</div>
+
+				<AboutSection />
+
+				<div className='max-w-5xl mx-auto px-6'>
+					<div className='h-px bg-white/5' />
+				</div>
+
+				<RegistrySection />
+
+				<ContactSection />
+			</main>
 		</div>
 	);
 }
