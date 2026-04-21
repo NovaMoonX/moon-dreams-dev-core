@@ -4,6 +4,7 @@ import { FOUNDER_EMAIL, APP_TITLE } from '@lib/app';
 
 const serviceStack = [
 	{ label: 'React', description: 'Component architecture & SPA development' },
+	{ label: 'React Native', description: 'Cross-platform mobile app development' },
 	{ label: 'TypeScript', description: 'Type-safe, maintainable codebases' },
 	{ label: 'Tailwind CSS', description: 'Utility-first styling systems' },
 	{ label: 'Chrome Extension API', description: 'Browser extension development' },

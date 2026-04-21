@@ -16,15 +16,6 @@ interface Project {
 
 const activeProjects: Project[] = [
 	{
-		name: 'Dreamer UI',
-		category: 'Component Library',
-		status: 'Stable',
-		stack: ['React', 'TypeScript', 'Tailwind CSS'],
-		description:
-			'The component library I use across every project. It started as a way to stop rebuilding the same pieces, and turned into something I actually publish.',
-		url: 'https://ui.moondreams.dev/',
-	},
-	{
 		name: 'Quick Links',
 		category: 'Chrome Extension',
 		status: 'Stable',

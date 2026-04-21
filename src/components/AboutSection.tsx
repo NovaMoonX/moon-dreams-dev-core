@@ -4,12 +4,12 @@ import { join } from '@moondreamsdev/dreamer-ui/utils';
 const pillars = [
 	{
 		icon: Users,
-		title: 'You talk to me directly.',
-		body: "If you hire me, you work with me. There's no account manager or handoff. I think this makes things simpler — you know exactly who's doing the work, decisions move faster, and I actually understand what you need by the time we're done talking.",
+		title: 'We work together directly.',
+		body: "If you hire me, you work with me. There's no account manager or handoff. I think this makes things simpler — you know exactly who's doing the work, decisions move faster, and we both actually understand what's needed by the time we're done talking.",
 	},
 	{
 		icon: Wrench,
-		title: 'I start with the problem.',
+		title: 'It starts with the problem.',
 		body: "I'm drawn to things that are genuinely annoying to live with. Not everything I've built solves the problem well — a couple projects are parked right now because they didn't. But that's where I try to start: something real, something worth fixing.",
 	},
 	{
