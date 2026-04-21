@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { join } from '@moondreamsdev/dreamer-ui/utils';
 import { HeroSection } from '@components/HeroSection';
 import { SiteNav } from '@components/SiteNav';
+import { MottoSection } from '@components/MottoSection';
 import { AboutSection } from '@components/AboutSection';
 import { RegistrySection } from '@components/RegistrySection';
 import { DeveloperSection } from '@components/DeveloperSection';
@@ -23,7 +24,8 @@ function Home() {
 				)}
 				aria-hidden={!revealed}
 			>
-				{/* Divider line */}
+				<MottoSection />
+
 				<div className='max-w-5xl mx-auto px-6'>
 					<div className='h-px bg-white/5' />
 				</div>
@@ -49,3 +51,4 @@ function Home() {
 }
 
 export default Home;
+

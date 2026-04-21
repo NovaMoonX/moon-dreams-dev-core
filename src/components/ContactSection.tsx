@@ -1,5 +1,6 @@
 import { Mail, GitBranch, Moon } from 'lucide-react';
-import { FOUNDER_NAME, FOUNDER_EMAIL, APP_TITLE } from '@lib/app';
+import { CopyButton } from '@moondreamsdev/dreamer-ui/components';
+import { FOUNDER_EMAIL, APP_TITLE } from '@lib/app';
 
 const serviceStack = [
 	{ label: 'React', description: 'Component architecture & SPA development' },
@@ -24,10 +25,10 @@ export function ContactSection() {
 					{/* Service stack */}
 					<div>
 						<p className='text-xs font-mono text-violet-400 tracking-widest uppercase mb-3'>
-						§ 05 · Service Stack
+							§ 05 · What I Work With
 						</p>
 						<h2 className='text-2xl font-extrabold text-white mb-6 tracking-tight'>
-							What ships here.
+							Things I reach for.
 						</h2>
 						<div className='grid grid-cols-1 gap-3'>
 							{serviceStack.map(({ label, description }) => (
@@ -47,36 +48,44 @@ export function ContactSection() {
 					{/* Connect */}
 					<div>
 						<p className='text-xs font-mono text-violet-400 tracking-widest uppercase mb-3'>
-						§ 06 · Connect
+							§ 06 · Get In Touch
 						</p>
 						<h2 className='text-2xl font-extrabold text-white mb-4 tracking-tight'>
-							Let&rsquo;s build something.
+							Let&rsquo;s work on something.
 						</h2>
 						<p className='text-slate-400 text-sm leading-relaxed mb-8'>
-							{APP_TITLE} is open to collaboration and contract work. Whether
-							it&rsquo;s a greenfield project, a specific engineering problem, or
-							something in between—reach out directly to {FOUNDER_NAME}.
+							I&rsquo;m open to contract work and collaboration — whether that&rsquo;s
+							a greenfield project, a specific problem to dig into, or something
+							in between. Just reach out directly.
 						</p>
 
 						<div className='space-y-4'>
 							{/* Email */}
-							<a
-								href={`mailto:${FOUNDER_EMAIL}`}
-								className='flex items-center gap-3 group w-fit'
-								aria-label={`Email ${FOUNDER_NAME}`}
-							>
-								<div className='flex items-center justify-center w-9 h-9 rounded-lg bg-violet-500/10 border border-violet-500/20 group-hover:bg-violet-500/20 transition-colors duration-200'>
+							<div className='flex items-center gap-3 w-fit'>
+								<div className='flex items-center justify-center w-9 h-9 rounded-lg bg-violet-500/10 border border-violet-500/20'>
 									<Mail className='size-4 text-violet-400' aria-hidden='true' />
 								</div>
 								<div>
 									<span className='text-xs font-mono text-slate-500 block'>
-										Primary
+										Email
 									</span>
-									<span className='text-sm text-white group-hover:text-violet-300 transition-colors duration-200 font-mono'>
-										{FOUNDER_EMAIL}
-									</span>
+									<div className='flex items-center gap-2'>
+										<a
+											href={`mailto:${FOUNDER_EMAIL}`}
+											className='text-sm text-white hover:text-violet-300 transition-colors duration-200 font-mono'
+											aria-label={`Email ${FOUNDER_EMAIL}`}
+										>
+											{FOUNDER_EMAIL}
+										</a>
+										<CopyButton
+											textToCopy={FOUNDER_EMAIL}
+											iconSize={13}
+											className='text-slate-600 hover:text-violet-400 transition-colors duration-150'
+											aria-label='Copy email address'
+										/>
+									</div>
 								</div>
-							</a>
+							</div>
 
 							{/* GitHub */}
 							<a
@@ -94,7 +103,7 @@ export function ContactSection() {
 								</div>
 								<div>
 									<span className='text-xs font-mono text-slate-500 block'>
-										Open Source
+										GitHub
 									</span>
 									<span className='text-sm text-white group-hover:text-slate-200 transition-colors duration-200 font-mono'>
 										github.com/NovaMoonX
@@ -118,7 +127,7 @@ export function ContactSection() {
 					<div className='flex items-center gap-2 text-slate-600'>
 						<Moon className='size-4 text-violet-500/60' aria-hidden='true' />
 						<span className='text-xs font-mono'>
-							{APP_TITLE} LLC &mdash; {FOUNDER_NAME}
+							{APP_TITLE} LLC
 						</span>
 					</div>
 					<span className='text-xs font-mono text-slate-700'>

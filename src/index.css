@@ -38,6 +38,26 @@ html, body {
   transition: height 0.3s ease;
 }
 
+/* Motto shimmer animation — light sweep across the motto text before hero closes */
+@keyframes motto-shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.motto-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgb(148, 163, 184) 20%,
+    rgb(196, 181, 253) 50%,
+    rgb(148, 163, 184) 80%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: motto-shimmer 1.5s ease-in-out forwards;
+}
+
 
 /* Dreamer UI styles */
 @import "@moondreamsdev/dreamer-ui/styles"; /* non-TailwindCSS styles */

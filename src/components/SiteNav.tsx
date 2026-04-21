@@ -1,11 +1,6 @@
 import { join } from '@moondreamsdev/dreamer-ui/utils';
-
-const navLinks = [
-	{ href: '#about', label: 'About' },
-	{ href: '#registry', label: 'Registry' },
-	{ href: '#developers', label: 'Developers' },
-	{ href: '#contact', label: 'Contact' },
-];
+import { Moon } from 'lucide-react';
+import { APP_TITLE, NAV_LINKS } from '@lib/app';
 
 interface SiteNavProps {
 	visible: boolean;
@@ -20,16 +15,29 @@ export function SiteNav({ visible }: SiteNavProps) {
 			)}
 			aria-label='Primary navigation'
 		>
-			<div className='max-w-5xl mx-auto px-6 h-12 flex items-center justify-end gap-6'>
-				{navLinks.map(({ href, label }) => (
-					<a
-						key={href}
-						href={href}
-						className='text-xs font-mono text-slate-500 hover:text-violet-400 transition-colors duration-150 tracking-widest uppercase'
-					>
-						{label}
-					</a>
-				))}
+			<div className={join(
+				'max-w-5xl mx-auto px-6 py-2.5 flex flex-col items-center sm:flex-row sm:justify-between gap-y-1 gap-x-6',
+			)}>
+				{/* Company name — left on wide, centered on narrow */}
+				<div className='flex items-center gap-2 shrink-0'>
+					<Moon className='size-4 text-violet-400' aria-hidden='true' />
+					<span className='text-sm font-bold text-white tracking-tight'>
+						{APP_TITLE}
+					</span>
+				</div>
+
+				{/* Nav links — right on wide, centered below on narrow */}
+				<div className='flex items-center flex-wrap justify-center gap-x-6 gap-y-1'>
+					{NAV_LINKS.map(({ href, label }) => (
+						<a
+							key={href}
+							href={href}
+							className='text-xs font-mono text-slate-500 hover:text-violet-400 transition-colors duration-150 tracking-widest uppercase'
+						>
+							{label}
+						</a>
+					))}
+				</div>
 			</div>
 		</nav>
 	);

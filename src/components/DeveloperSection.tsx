@@ -1,14 +1,13 @@
 import { Code2, Puzzle, BookOpen, ExternalLink } from 'lucide-react';
 import { join } from '@moondreamsdev/dreamer-ui/utils';
-import { FOUNDER_NAME } from '@lib/app';
 
-const openSourceItems = [
+const devTools = [
 	{
 		icon: BookOpen,
 		title: 'Dreamer UI',
 		subtitle: 'Component Library',
 		description:
-			'An accessible, customizable React component library powering all Moon Dreams Dev projects. Built with Tailwind CSS — designed for speed without sacrificing quality.',
+			"My component library — built for the projects here and published for anyone to use. If you find it useful or want to contribute, I'm open to it.",
 		url: 'https://ui.moondreams.dev/',
 		urlLabel: 'ui.moondreams.dev',
 		badge: 'npm',
@@ -18,7 +17,7 @@ const openSourceItems = [
 		title: 'Quick Links',
 		subtitle: 'Chrome Extension',
 		description:
-			'A developer-focused browser extension for managing and launching your most-used links instantly. Local-only storage, zero telemetry, built for flow state.',
+			"A Chrome extension I made for managing frequently-used links. Opens a custom tab with instant access to whatever you have saved. Local-only, no accounts.",
 		url: 'https://chromewebstore.google.com/detail/quick-links/enlpbohhejbabdcpeoepflldnppafjmb',
 		urlLabel: 'Chrome Web Store',
 		badge: 'extension',
@@ -37,15 +36,15 @@ export function DeveloperSection() {
 					§ 04 · For Developers
 				</p>
 				<h2 className={join('text-3xl md:text-4xl font-extrabold text-white tracking-tight')}>
-					Built for builders.
+					Things I use.
 					<br />
-					<span className={join('text-slate-400')}>Open to working with you.</span>
+					<span className={join('text-slate-400')}>Open to building with you.</span>
 				</h2>
 				<p className={join('mt-4 text-slate-400 max-w-xl text-base leading-relaxed')}>
-					Moon Dreams Dev is actively open to developer collaboration. If
-					you&rsquo;re working on something interesting or want to contribute,
-					reach out to {FOUNDER_NAME} directly. Below are tools that came out of
-					the same creative cycle.
+					I&rsquo;m open to working with other developers — pair programming,
+					reviewing code, contributing to something you&rsquo;re building, or
+					just collaborating on ideas. Below are tools that came out of my own
+					work that you might find useful.
 				</p>
 			</div>
 
@@ -59,15 +58,14 @@ export function DeveloperSection() {
 						Open to collaboration &amp; contract work
 					</p>
 					<p className={join('text-sm text-slate-400 mt-0.5')}>
-						Pair programming, architecture consulting, greenfield projects, open-source
-						contributions — all fair game. DM or email to start a conversation.
+						Pair programming, code reviews, greenfield projects, open-source — I&rsquo;m open to it. Just email me to start a conversation.
 					</p>
 				</div>
 			</div>
 
-			{/* Open-source tools */}
+			{/* Dev tools */}
 			<div className={join('grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5 rounded-xl overflow-hidden')}>
-				{openSourceItems.map(({ icon: Icon, title, subtitle, description, url, urlLabel, badge }) => (
+				{devTools.map(({ icon: Icon, title, subtitle, description, url, urlLabel, badge }) => (
 					<div
 						key={title}
 						className={join('bg-[#020617] p-7 flex flex-col gap-5 hover:bg-white/[0.02] transition-colors duration-200')}
