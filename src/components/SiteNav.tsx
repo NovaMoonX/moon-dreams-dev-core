@@ -3,6 +3,7 @@ import { join } from '@moondreamsdev/dreamer-ui/utils';
 const navLinks = [
 	{ href: '#about', label: 'About' },
 	{ href: '#registry', label: 'Registry' },
+	{ href: '#developers', label: 'Developers' },
 	{ href: '#contact', label: 'Contact' },
 ];
 

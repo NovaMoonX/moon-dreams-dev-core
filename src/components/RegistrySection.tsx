@@ -24,6 +24,15 @@ const projects: Project[] = [
 		url: 'https://www.npmjs.com/package/@moondreamsdev/dreamer-ui',
 	},
 	{
+		name: 'Quick Links',
+		category: 'Chrome Extension',
+		status: 'Stable',
+		stack: ['Chrome Extension API', 'TypeScript', 'React'],
+		impact:
+			'Developer-focused tab for launching your most-used links instantly. Local-only, zero telemetry, designed for flow state.',
+		url: 'https://chromewebstore.google.com/detail/quick-links/enlpbohhejbabdcpeoepflldnppafjmb',
+	},
+	{
 		name: 'Moon Dreams Dev Core',
 		category: 'Web Application',
 		status: 'In Development',

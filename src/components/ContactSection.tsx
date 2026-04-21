@@ -1,4 +1,4 @@
-import { Mail, Github, Moon } from 'lucide-react';
+import { Mail, GitBranch, Moon } from 'lucide-react';
 import { FOUNDER_NAME, FOUNDER_EMAIL, APP_TITLE } from '@lib/app';
 
 const serviceStack = [
@@ -24,7 +24,7 @@ export function ContactSection() {
 					{/* Service stack */}
 					<div>
 						<p className='text-xs font-mono text-violet-400 tracking-widest uppercase mb-3'>
-							§ 04 · Service Stack
+						§ 05 · Service Stack
 						</p>
 						<h2 className='text-2xl font-extrabold text-white mb-6 tracking-tight'>
 							What ships here.
@@ -47,7 +47,7 @@ export function ContactSection() {
 					{/* Connect */}
 					<div>
 						<p className='text-xs font-mono text-violet-400 tracking-widest uppercase mb-3'>
-							§ 05 · Connect
+						§ 06 · Connect
 						</p>
 						<h2 className='text-2xl font-extrabold text-white mb-4 tracking-tight'>
 							Let&rsquo;s build something.
@@ -87,7 +87,7 @@ export function ContactSection() {
 								aria-label='GitHub profile'
 							>
 								<div className='flex items-center justify-center w-9 h-9 rounded-lg bg-white/[0.04] border border-white/10 group-hover:bg-white/[0.08] transition-colors duration-200'>
-									<Github
+									<GitBranch
 										className='size-4 text-slate-400'
 										aria-hidden='true'
 									/>

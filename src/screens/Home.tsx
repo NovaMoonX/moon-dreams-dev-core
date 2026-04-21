@@ -4,6 +4,7 @@ import { HeroSection } from '@components/HeroSection';
 import { SiteNav } from '@components/SiteNav';
 import { AboutSection } from '@components/AboutSection';
 import { RegistrySection } from '@components/RegistrySection';
+import { DeveloperSection } from '@components/DeveloperSection';
 import { ContactSection } from '@components/ContactSection';
 
 function Home() {
@@ -34,6 +35,12 @@ function Home() {
 				</div>
 
 				<RegistrySection />
+
+				<div className='max-w-5xl mx-auto px-6'>
+					<div className='h-px bg-white/5' />
+				</div>
+
+				<DeveloperSection />
 
 				<ContactSection />
 			</main>
