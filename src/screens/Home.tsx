@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { join } from '@moondreamsdev/dreamer-ui/utils';
 import { HeroSection } from '@components/HeroSection';
-import { SiteNav } from '@components/SiteNav';
 import { MottoSection } from '@components/MottoSection';
 import { AboutSection } from '@components/AboutSection';
 import { RegistrySection } from '@components/RegistrySection';
@@ -14,7 +13,6 @@ function Home() {
 	return (
 		<div className='min-h-dvh w-full bg-[#020617] text-foreground font-[Inter,sans-serif]'>
 			<HeroSection revealed={revealed} onReveal={() => setRevealed(true)} />
-			<SiteNav visible={revealed} />
 
 			{/* Main content — fades in after hero transition */}
 			<main

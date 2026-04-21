@@ -30,7 +30,7 @@ export function HeroSection({ revealed, onReveal }: HeroSectionProps) {
 	return (
 		<header
 			className={join(
-				'relative w-full overflow-hidden border-b border-white/5 transition-all duration-700 ease-in-out',
+				'sticky top-0 z-50 relative w-full overflow-hidden border-b border-white/5 transition-all duration-700 ease-in-out',
 				revealed ? 'h-16' : 'h-dvh',
 			)}
 		>

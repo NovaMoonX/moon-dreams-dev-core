@@ -80,8 +80,9 @@ export function ContactSection() {
 										</a>
 										<CopyButton
 											textToCopy={FOUNDER_EMAIL}
+											variant='outline'
 											iconSize={13}
-											className='text-slate-600 hover:text-violet-400 transition-colors duration-150'
+											className='text-slate-500 hover:text-violet-400 transition-colors duration-150'
 											aria-label='Copy email address'
 										/>
 									</div>
