@@ -1,17 +1,19 @@
+import { useState } from 'react';
 import { join } from '@moondreamsdev/dreamer-ui/utils';
+import { Disclosure, Modal, Button } from '@moondreamsdev/dreamer-ui/components';
 import { ExternalLink } from 'lucide-react';
 
 type ProjectStatus = 'Stable' | 'In Development' | 'On Hold';
-type ProjectCategory = 'Component Library' | 'Web Application' | 'Chrome Extension' | 'Mobile Application';
+type ProjectCategory = 'Web App' | 'Chrome Extension' | 'Mobile App';
 
 interface Project {
 	name: string;
 	category: ProjectCategory;
 	status: ProjectStatus;
 	stack: string[];
-	description: string;
+	briefDescription: string;
+	fullDescription?: string;
 	url?: string;
-	startDate?: string;
 }
 
 const activeProjects: Project[] = [
@@ -20,55 +22,93 @@ const activeProjects: Project[] = [
 		category: 'Chrome Extension',
 		status: 'Stable',
 		stack: ['Chrome Extension API', 'TypeScript', 'React'],
-		description:
-			"Built this because I kept losing time switching between tabs to find the same links. Local storage only — no accounts, no tracking.",
+		briefDescription:
+			'Pin your most-visited links and jump to them instantly from the browser toolbar.',
+		fullDescription:
+			"I kept losing time hunting for the same links across tabs. Quick Links lets you pin anything and reach it from the extension popup in one click. No sync, no accounts — everything stays local in your browser.",
 		url: 'https://chromewebstore.google.com/detail/quick-links/enlpbohhejbabdcpeoepflldnppafjmb',
 	},
 	{
 		name: 'Angelia',
-		category: 'Mobile Application',
+		category: 'Mobile App',
 		status: 'In Development',
 		stack: ['React Native', 'TypeScript', 'Firebase'],
-		description:
-			'Originally built as a web app. Now becoming a React Native mobile app — currently in alpha testing.',
+		briefDescription:
+			'A communication-focused app, originally built for the web and now becoming a native mobile experience.',
+		fullDescription:
+			"Started as a website and I've been rebuilding it as a React Native mobile app. The web version is still live, but mobile is where this is headed. Currently in alpha testing.",
 		url: 'https://angelia.moondreams.dev/',
 	},
 	{
 		name: 'Akyl',
-		category: 'Web Application',
-		status: 'In Development',
+		category: 'Web App',
+		status: 'Stable',
 		stack: ['React', 'TypeScript'],
-		description: 'An active web project in development.',
+		briefDescription:
+			'Visualize how your money flows — from income to expenses to savings — as an interactive flowchart.',
+		fullDescription:
+			"I'd sometimes stop and wonder: where does the money go? I tried spreadsheets, apps, and handwritten notes — each with their own tradeoffs. For someone who budgets occasionally and doesn't need the depth of a full-featured app, having all the income and expense \"buckets\" laid out visually is exactly the right level.\n\nYou build a top-to-bottom flowchart that maps your income sources to spending categories and savings goals. You can view it across different periods (weekly, monthly, annually), and all data stays in your browser — no accounts, completely private. Export your budget as a file or image to save your work.",
 		url: 'https://akyl.moondreams.dev/',
 	},
 	{
 		name: 'Arke',
-		category: 'Web Application',
+		category: 'Web App',
 		status: 'In Development',
 		stack: ['React', 'TypeScript', 'Firebase'],
-		description:
-			'Transfer text, links, files, and media across devices — just open it on both ends.',
+		briefDescription:
+			'Move content between your devices — text, links, images, files — without cables or accounts.',
+		fullDescription:
+			'Open it on two devices and transfer whatever you need in a few seconds. No setup, no login, no clipboard manager to install. Just a quick bridge between wherever you are.',
 		url: 'https://arke.moondreams.dev/',
+	},
+	{
+		name: 'Calypso',
+		category: 'Web App',
+		status: 'Stable',
+		stack: [],
+		briefDescription:
+			'A secure web application for account and access management.',
+		url: 'https://secure.moondreams.dev/login',
+	},
+	{
+		name: 'Demmi',
+		category: 'Web App',
+		status: 'In Development',
+		stack: [],
+		briefDescription: 'A project currently in development.',
+		url: 'https://demmi.moondreams.dev',
+	},
+	{
+		name: 'Tinies',
+		category: 'Web App',
+		status: 'In Development',
+		stack: [],
+		briefDescription: 'A project currently in development.',
+		url: 'https://tinies.moondreams.dev',
 	},
 ];
 
 const onHoldProjects: Project[] = [
 	{
 		name: 'Planner',
-		category: 'Web Application',
+		category: 'Web App',
 		status: 'On Hold',
 		stack: ['React', 'TypeScript'],
-		description:
-			"Got it mostly built, but it didn't solve the problem the way I wanted it to. Parked for now — might come back to it.",
+		briefDescription:
+			"Got it mostly built, but it didn't solve the problem the way I wanted it to.",
+		fullDescription:
+			"Parked for now. The core functionality works, but something about the approach wasn't clicking. I might come back to it with a different angle.",
 		url: 'https://planner.moondreams.dev',
 	},
 	{
 		name: 'Mnemo',
-		category: 'Web Application',
+		category: 'Web App',
 		status: 'On Hold',
 		stack: ['React', 'TypeScript', 'Firebase'],
-		description:
-			"Same situation as Planner — the core idea didn't quite land. Still here if I figure out a better angle.",
+		briefDescription:
+			"Same situation as Planner — the core idea didn't quite land the way I hoped.",
+		fullDescription:
+			"Still here if I figure out a better approach. Not abandoned, just waiting for the right direction.",
 		url: 'https://mnemo-ba644.web.app/',
 	},
 ];
@@ -88,54 +128,48 @@ const statusConfig: Record<ProjectStatus, { label: string; className: string }> 
 	},
 };
 
-function ProjectRow({ project, isLast }: { project: Project; isLast: boolean }) {
+interface ProjectCardProps {
+	project: Project;
+	onShowTech: () => void;
+	muted?: boolean;
+}
+
+function ProjectCard({ project, onShowTech, muted }: ProjectCardProps) {
 	return (
 		<div
 			className={join(
-				'grid grid-cols-1 md:grid-cols-[2fr_1.5fr_1fr_2fr] gap-4 px-6 py-5 hover:bg-white/[0.02] transition-colors duration-150',
-				isLast ? '' : 'border-b border-white/5',
+				'rounded-xl border p-6 flex flex-col gap-4 transition-colors duration-150',
+				muted
+					? 'border-white/[0.04] bg-white/[0.01] hover:bg-white/[0.02]'
+					: 'border-white/5 bg-white/[0.02] hover:bg-white/[0.03]',
 			)}
 		>
-			{/* Name + Category */}
-			<div className='flex flex-col gap-1'>
-				<div className='flex items-center gap-2'>
-					<span className='text-sm font-semibold text-white'>
-						{project.name}
+			{/* Header row */}
+			<div className='flex items-start justify-between gap-3'>
+				<div className='flex flex-col gap-1'>
+					<div className='flex items-center gap-2'>
+						<span className={join('text-base font-semibold', muted ? 'text-slate-400' : 'text-white')}>
+							{project.name}
+						</span>
+						{project.url && (
+							<a
+								href={project.url}
+								target='_blank'
+								rel='noopener noreferrer'
+								className='text-slate-600 hover:text-violet-400 transition-colors duration-150'
+								aria-label={`Visit ${project.name}`}
+							>
+								<ExternalLink className='size-3.5' />
+							</a>
+						)}
+					</div>
+					<span className='text-xs font-mono text-slate-600'>
+						{project.category}
 					</span>
-					{project.url && (
-						<a
-							href={project.url}
-							target='_blank'
-							rel='noopener noreferrer'
-							className='text-slate-600 hover:text-violet-400 transition-colors duration-150'
-							aria-label={`Visit ${project.name}`}
-						>
-							<ExternalLink className='size-3.5' />
-						</a>
-					)}
 				</div>
-				<span className='text-xs font-mono text-slate-500'>
-					{project.category}
-				</span>
-			</div>
-
-			{/* Stack */}
-			<div className='flex flex-wrap gap-1.5 items-start content-start'>
-				{project.stack.map((tech) => (
-					<span
-						key={tech}
-						className='px-2 py-0.5 rounded text-[10px] font-mono text-slate-400 bg-white/[0.04] border border-white/5'
-					>
-						{tech}
-					</span>
-				))}
-			</div>
-
-			{/* Status */}
-			<div className='flex items-start'>
 				<span
 					className={join(
-						'inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-mono border',
+						'inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-mono border shrink-0',
 						statusConfig[project.status].className,
 					)}
 				>
@@ -143,30 +177,44 @@ function ProjectRow({ project, isLast }: { project: Project; isLast: boolean }) 
 				</span>
 			</div>
 
-			{/* Description */}
+			{/* Brief description */}
 			<p className='text-sm text-slate-400 leading-relaxed'>
-				{project.description}
+				{project.briefDescription}
 			</p>
-		</div>
-	);
-}
 
-function TableHeader() {
-	return (
-		<div className='hidden md:grid grid-cols-[2fr_1.5fr_1fr_2fr] gap-4 px-6 py-3 bg-white/[0.02] border-b border-white/5'>
-			{['Project', 'Stack', 'Status', 'Description'].map((col) => (
-				<span
-					key={col}
-					className='text-xs font-mono text-slate-500 tracking-widest uppercase'
+			{/* Full description via Disclosure */}
+			{project.fullDescription && (
+				<Disclosure
+					label='Read more'
+					className='text-xs'
+					buttonClassName='text-xs font-mono text-slate-500 hover:text-violet-400 transition-colors duration-150'
 				>
-					{col}
-				</span>
-			))}
+					<p className='mt-2 text-sm text-slate-500 leading-relaxed whitespace-pre-line'>
+						{project.fullDescription}
+					</p>
+				</Disclosure>
+			)}
+
+			{/* Tech details button */}
+			{project.stack.length > 0 && (
+				<div className='mt-auto pt-2'>
+					<Button
+						variant='outline'
+						size='sm'
+						onClick={onShowTech}
+						className='text-xs font-mono text-slate-500'
+					>
+						Tech details
+					</Button>
+				</div>
+			)}
 		</div>
 	);
 }
 
 export function RegistrySection() {
+	const [techProject, setTechProject] = useState<Project | null>(null);
+
 	return (
 		<section
 			id='registry'
@@ -187,38 +235,55 @@ export function RegistrySection() {
 				</p>
 			</div>
 
-			{/* Active projects */}
-			<div className='rounded-xl border border-white/5 overflow-hidden mb-10'>
-				<TableHeader />
-				{activeProjects.map((project, i) => (
-					<ProjectRow
+			{/* Active projects grid */}
+			<div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-12'>
+				{activeProjects.map((project) => (
+					<ProjectCard
 						key={project.name}
 						project={project}
-						isLast={i === activeProjects.length - 1}
+						onShowTech={() => setTechProject(project)}
 					/>
 				))}
 			</div>
 
 			{/* On-hold projects */}
-			<div className='mb-4'>
+			<div>
 				<p className='text-xs font-mono text-slate-500 tracking-widest uppercase mb-4'>
 					// On hold — may revisit
 				</p>
-				<div className='rounded-xl border border-white/5 overflow-hidden'>
-					<TableHeader />
-					{onHoldProjects.map((project, i) => (
-						<ProjectRow
+				<div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+					{onHoldProjects.map((project) => (
+						<ProjectCard
 							key={project.name}
 							project={project}
-							isLast={i === onHoldProjects.length - 1}
+							onShowTech={() => setTechProject(project)}
+							muted
 						/>
 					))}
 				</div>
 			</div>
 
-			<p className='mt-6 text-xs font-mono text-slate-600 text-center tracking-wide'>
+			<p className='mt-10 text-xs font-mono text-slate-600 text-center tracking-wide'>
 				// Start dates to be added — registry updated as things ship.
 			</p>
+
+			{/* Tech stack modal */}
+			<Modal
+				isOpen={techProject !== null}
+				onClose={() => setTechProject(null)}
+				title={techProject ? `${techProject.name} — Tech Stack` : ''}
+			>
+				<div className='flex flex-wrap gap-2 pt-2'>
+					{techProject?.stack.map((tech) => (
+						<span
+							key={tech}
+							className='px-3 py-1 rounded text-xs font-mono text-violet-300 bg-violet-500/10 border border-violet-500/20'
+						>
+							{tech}
+						</span>
+					))}
+				</div>
+			</Modal>
 		</section>
 	);
 }
