@@ -42,8 +42,9 @@ export function HeroSection({ revealed, onReveal }: HeroSectionProps) {
 					'relative z-10 flex flex-col items-center text-center gap-6 px-6 transition-all duration-500 ease-in-out',
 					revealed
 						? 'opacity-0 -translate-y-3 pointer-events-none absolute'
-						: 'opacity-100 translate-y-0',
-					!mottoVisible ? 'opacity-0 translate-y-2' : '',
+						: mottoVisible
+							? 'opacity-100 translate-y-0'
+							: 'opacity-0 translate-y-2',
 				)}
 				aria-hidden={revealed}
 			>
