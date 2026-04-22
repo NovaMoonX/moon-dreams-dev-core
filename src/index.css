@@ -14,7 +14,7 @@
 
 /* Override the variables to create a dark theme */
 .dark {
-	--color-background: var(--color-slate-900);
+	--color-background: #020617; /* slate-950 / "Deep Night" brand background */
 	--color-foreground: var(--color-slate-100);
 }
 
@@ -26,6 +26,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 html {
@@ -35,6 +36,27 @@ html {
 /* Smooth height transitions for when keyboard appears on mobile */
 html, body {
   transition: height 0.3s ease;
+}
+
+/* Motto shimmer animation — single left-to-right bright sweep before hero closes */
+@keyframes motto-shimmer {
+  0%   { background-position: -150% center; }
+  100% { background-position: 250% center; }
+}
+
+.motto-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgb(148, 163, 184) 20%,   /* slate-300 base */
+    rgb(255, 255, 255) 45%,   /* bright white highlight */
+    rgb(216, 180, 254) 55%,   /* violet-300 shimmer */
+    rgb(148, 163, 184) 80%    /* slate-300 base */
+  );
+  background-size: 300% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: motto-shimmer 3s ease-in-out forwards;
 }
 
 

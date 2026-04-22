@@ -1,10 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import ThemeToggle from '@ui/ThemeToggle';
 
 function Layout() {
 	return (
-		<div className='page transition-colors duration-200'>
-			<ThemeToggle />
+		<div className='min-h-dvh w-full bg-background text-foreground transition-colors duration-200'>
 			<Outlet />
 		</div>
 	);
